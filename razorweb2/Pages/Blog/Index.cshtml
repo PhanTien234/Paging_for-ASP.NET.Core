@@ -2,25 +2,26 @@
 @model razorweb2.Pages.Blog.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List of Blog";
+    int i =0;
 }
 
-<h1>Index</h1>
+<h1>List of Blog</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create a new Blog</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                Number
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Article[0].Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Article[0].Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Article[0].Content)
             </th>
             <th></th>
         </tr>
@@ -28,14 +29,12 @@
     <tbody>
 @foreach (var item in Model.Article) {
         <tr>
+            <td>@(++i)</td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

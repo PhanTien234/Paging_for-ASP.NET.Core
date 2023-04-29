@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,11 +12,14 @@ namespace razorweb2.models{
         [StringLength(255)]
         [Required]
         [Column(TypeName = "nvarchar")]
+        [DisplayName("Titles")]
         public string Title {get; set;}
         [DataType(DataType.Date)]
         [Required]
+        [DisplayName("Created at")]
         public DateTime Created {get; set;}
         [Column(TypeName = "ntext")]
+        [DisplayName("Content")]
         public string Content {get; set;}
 
     }

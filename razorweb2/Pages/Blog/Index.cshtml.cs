@@ -22,10 +22,16 @@ namespace razorweb2.Pages.Blog
 
         public async Task OnGetAsync()
         {
-            if (_context.articles != null)
-            {
-                Article = await _context.articles.ToListAsync();
-            }
+            // if (_context.articles != null)
+            // {
+            //     Article = await _context.articles.ToListAsync();
+            // }
+            // Sort Categories by DateTime
+            var qr = from a in _context.articles
+                    orderby a.Created descending
+                    select a;
+
+           Article = await qr.ToListAsync();
         }
     }
 }
