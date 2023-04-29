@@ -20,7 +20,7 @@ namespace razorweb2.Pages.Blog
 
         public IList<Article> Article { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string SearchString)
         {
             // if (_context.articles != null)
             // {
@@ -31,7 +31,13 @@ namespace razorweb2.Pages.Blog
                     orderby a.Created descending
                     select a;
 
-           Article = await qr.ToListAsync();
+           if(!string.IsNullOrEmpty(SearchString)){
+            Article = qr.Where(a => a.Title.Contains(SearchString)).ToList();
+           }
+           else{
+            
+            Article = await qr.ToListAsync();
+           }
         }
     }
 }
