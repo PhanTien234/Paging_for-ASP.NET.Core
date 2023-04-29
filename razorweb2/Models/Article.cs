@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace razorweb2.models{
    
-   //muốn đổi tên bảng khi develoy lên SQL server thì ta dùng [Table("nametable muon doi")]
+   //muốn đổi tên bảng khi develoy lên SQL server thì ta dùng [Table("nametable muon doi")] razorweb2.models.Article
     public class Article{
 
         [Key]

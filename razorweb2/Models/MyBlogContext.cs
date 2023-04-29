@@ -2,6 +2,7 @@ using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 
 namespace razorweb2.models{
+    //razorweb2.models.Article
 
     public class MyBlogContext : DbContext
     {

@@ -61,3 +61,9 @@ namespace razorweb2
         }
     }
 }
+
+/*
+CREATE, READ, UPDATE, DELETE (CRUD)
+
+    dotnet asp-codegenerator  razorpage -m razorweb2.models.Article -dc razorweb2.models.Article -outDir Pages/Blog -udl --referenceScriptLibraries
+*/
