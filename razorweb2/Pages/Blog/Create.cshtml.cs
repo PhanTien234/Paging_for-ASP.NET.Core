@@ -35,7 +35,7 @@ namespace razorweb2.Pages.Blog
                 return Page();
             }
 
-            _context.articles.Add(Article);
+            _context.Add(Article);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
