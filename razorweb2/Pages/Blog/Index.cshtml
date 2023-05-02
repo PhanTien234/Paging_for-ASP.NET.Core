@@ -6,6 +6,9 @@
     int i =0;
 }
 
+
+
+
 <h1>List of Blog</h1>
 
 <form method="get" asp-page="./Index">
@@ -51,3 +54,14 @@
 }
     </tbody>
 </table>
+
+
+@{
+    var pagingModel = new razorweb2.Helpers.PagingModel(){
+        currentPage = Model.currentPage,
+        countPages = Model.countPages,
+        generateUrl = (int? p) => @Url.Page("/Blog/Index", new {p=p})
+    };
+}
+
+<partial name= "_Paging" model= "@pagingModel"/>
