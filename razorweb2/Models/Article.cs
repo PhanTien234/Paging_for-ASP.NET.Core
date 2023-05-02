@@ -9,13 +9,13 @@ namespace razorweb2.models{
 
         [Key]
         public int Id {get; set;}
-        [StringLength(255)]
-        [Required]
+        [StringLength(255, MinimumLength = 5, ErrorMessage = "{0} must be strength from {2} to {1}")]
+        [Required(ErrorMessage = "{0} must type")]
         [Column(TypeName = "nvarchar")]
         [DisplayName("Titles")]
         public string Title {get; set;}
         [DataType(DataType.Date)]
-        [Required]
+        [Required (ErrorMessage = "{0} must type")]
         [DisplayName("Created at")]
         public DateTime Created {get; set;}
         [Column(TypeName = "ntext")]
