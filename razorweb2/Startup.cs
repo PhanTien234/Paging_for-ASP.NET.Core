@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using razorweb2.models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace razorweb2
 {
@@ -31,6 +33,12 @@ namespace razorweb2
                 string connectString = Configuration.GetConnectionString("MyBlogContext");
                 options.UseSqlServer(connectString);
             });
+
+            // Next, you must sign up Identity for configureServices
+            services.AddIdentity<AppUser, IdentityRole>()
+                    .AddEntityFrameworkStores<MyBlogContext>()
+                    .AddDefaultTokenProviders();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,13 +59,17 @@ namespace razorweb2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            // Make sure that you have configured two middleware for use Authentication and Authorization after use Routing         
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+
+            IdentityUser user;
+            IdentityDbContext context;
         }
     }
 }
@@ -66,4 +78,11 @@ namespace razorweb2
 CREATE, READ, UPDATE, DELETE (CRUD)
 
     dotnet asp-codegenerator  razorpage -m razorweb2.models.Article -dc razorweb2.models.Article -outDir Pages/Blog -udl --referenceScriptLibraries
+
+    Identity:
+    - Authentication: Xác định danh tính => Login, Logout,...
+    - Authorization: Xác thực quyền truy cập
+    - Quản lí User: Sign Up, User, Role, etc
+
+
 */
