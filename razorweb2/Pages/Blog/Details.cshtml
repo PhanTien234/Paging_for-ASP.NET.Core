@@ -1,0 +1,17 @@
+﻿@page "/blog/detailsBlog/{id:int}"
+@model razorweb2.Pages.Blog.DetailsModel
+
+@{
+    ViewData["Title"] = @Model.Article.Title;
+}
+
+<h1>@Model.Article.Title</h1>
+<p><i>@Html.DisplayFor(model => model.Article.Created)</i></p>
+<hr>
+ @* @Html.DisplayFor(model => model.Article.Content) *@
+ @Html.Raw(Model.Article.Content)
+<hr>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Article?.Id">Edit</a> |
+    <a asp-page="./Index">List of Blog</a>
+</div>

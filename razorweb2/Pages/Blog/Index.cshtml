@@ -1,0 +1,67 @@
+﻿@page
+@model razorweb2.Pages.Blog.IndexModel
+
+@{
+    ViewData["Title"] = "List of Blog";
+    int i =0;
+}
+
+
+
+
+<h1>List of Blog</h1>
+
+<form method="get" asp-page="./Index">
+    <label for="">Search</label>
+    <input name="SearchString" value="">
+    <button type="submit">Tìm</button>
+</form>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create a new Blog</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Number
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Created)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Article) {
+        <tr>
+            <td>@(++i)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+@{
+    var pagingModel = new razorweb2.Helpers.PagingModel(){
+        currentPage = Model.currentPage,
+        countPages = Model.countPages,
+        generateUrl = (int? p) => @Url.Page("/Blog/Index", new {p=p})
+    };
+}
+
+<partial name= "_Paging" model= "@pagingModel"/>
