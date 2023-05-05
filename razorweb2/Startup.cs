@@ -13,6 +13,8 @@ using razorweb2.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using razorweb2.Mail;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace razorweb2
 {
@@ -28,6 +30,11 @@ namespace razorweb2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            var mailSetting = Configuration.GetSection("MailSettings");
+            services.Configure<MailSettings>(mailSetting);
+            services.AddSingleton<IEmailSender, SendMailService>();
+
             services.AddRazorPages();
                 services.AddDbContext<MyBlogContext>(options => {
                 string connectString = Configuration.GetConnectionString("MyBlogContext");
@@ -99,8 +106,9 @@ namespace razorweb2
                 endpoints.MapRazorPages();
             });
 
-            IdentityUser user;
-            IdentityDbContext context;
+
+
+
         }
     }
 }
