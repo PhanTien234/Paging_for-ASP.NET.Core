@@ -42,14 +42,14 @@ namespace razorweb2
             });
 
             // Next, you must sign up Identity for configureServices
-            // services.AddIdentity<AppUser, IdentityRole>()
-            //         .AddEntityFrameworkStores<MyBlogContext>()
-            //         .AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<MyBlogContext>()
+                    .AddDefaultTokenProviders();
 
-            
-            services.AddDefaultIdentity<AppUser>()
-                .AddEntityFrameworkStores<MyBlogContext>()
-                .AddDefaultTokenProviders();
+            services.AddScoped<UserManager<IdentityUser>>();
+            // services.AddDefaultIdentity<AppUser>()
+            //     .AddEntityFrameworkStores<MyBlogContext>()
+            //     .AddDefaultTokenProviders();
 
             // Truy cập IdentityOptions
             services.Configure<IdentityOptions> (options => {
